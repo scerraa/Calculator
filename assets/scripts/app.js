@@ -5,8 +5,33 @@ subtractBtn.addEventListener("click", subtract);
 divideBtn.addEventListener("click", divide);
 multiplyBtn.addEventListener("click", multiply);
 
+function calculate(type) {
+  const enteredNumber = userInput.value;
+  const initalResult = result;
+  let descripton;
+  if (!checkNumber(enteredNumber)) {
+    alert("Please enter a valid number");
+    return;
+  }
+  if (type === "ADD") {
+    descripton = `${result}+${enteredNumber}`;
+    result = result + parseFloat(enteredNumber);
+  } else if (type === "SUBTRACT") {
+    descripton = `${result}-${enteredNumber}`;
+    result = result - parseFloat(enteredNumber);
+  } else if (type === "MULTIPLY") {
+    descripton = `${result}*${enteredNumber}`;
+    result = result * parseFloat(enteredNumber);
+  } else if ((type = "DIVIDE")) {
+    descripton = `${result}/${enteredNumber}`;
+    result = result / parseFloat(enteredNumber);
+  }
+  outputResult(result, descripton);
+  writeToLog(type, initalResult, enteredNumber, result);
+}
+
 function checkNumber(number) {
-  if (number == "") {
+  if (number === "" || !parseInt(number)) {
     return false;
   }
   return true;
@@ -23,43 +48,14 @@ function writeToLog(operation, prevResult, number, result) {
   console.log(logEntries);
 }
 function add() {
-  const enteredNumber = userInput.value;
-  // console.log(typeof enteredNumber);
-  if (checkNumber(enteredNumber)) {
-    const initalResult = result;
-    const descripton = `${result}+${enteredNumber}`;
-    result = result + parseFloat(enteredNumber);
-    outputResult(result, descripton);
-    writeToLog("ADD", initalResult, enteredNumber, result);
-  } else alert("Please enter a valid number");
+  calculate("ADD");
 }
 function subtract() {
-  const enteredNumber = userInput.value;
-  if (checkNumber(enteredNumber)) {
-    const initalResult = result;
-    const descripton = `${result}-${enteredNumber}`;
-    result = result - parseFloat(enteredNumber);
-    outputResult(result, descripton);
-    writeToLog("SUBTRACT", initalResult, enteredNumber, result);
-  } else alert("Please enter a valid number");
+  calculate("SUBTRACT");
 }
 function divide() {
-  const enteredNumber = userInput.value;
-  if (checkNumber(enteredNumber)) {
-    const initalResult = result;
-    const descripton = `${result}/${enteredNumber}`;
-    result = result / parseFloat(enteredNumber);
-    outputResult(result, descripton);
-    writeToLog("DIVIDE", initalResult, enteredNumber, result);
-  } else alert("Please enter a valid number");
+  calculate("DIVIDE");
 }
 function multiply() {
-  const enteredNumber = userInput.value;
-  if (checkNumber(enteredNumber)) {
-    const initalResult = result;
-    const descripton = `${result}*${enteredNumber}`;
-    result = result * parseFloat(enteredNumber);
-    outputResult(result, descripton);
-    writeToLog("MULTIPLY", initalResult, enteredNumber, result);
-  } else alert("Please enter a valid number");
+  calculate("MULTIPLY");
 }
